@@ -1,6 +1,6 @@
 # PropertyBot - AI Chatbot Backend for Property Viewings
 
-This is a Java-based Spring Boot application that supports AI-assisted chatbot interaction for scheduling property viewing appointments. It integrates with OpenAI's ChatGPT, supports token-based authentication using JWT, logs and masks sensitive data, and automatically sends appointment reminders.
+This is a Java-based Spring Boot application that supports AI-assisted chatbot interaction for scheduling property viewing appointments. It integrates with DeepSeek AI, supports token-based authentication using JWT, and automatically sends appointment reminders.
 
 ---
 
@@ -28,7 +28,7 @@ cd property-chatbot
 Open `run.sh` and set your environment variables below
 ```bash
 export JWT_SECRET=[your_jwt_secret]
-export DEEPSEEK_API_KEY=[your_deepseek_api_ke]
+export DEEPSEEK_API_KEY=[your_deepseek_api_key]
 ```
 
 ### 3. **Run the Application**
