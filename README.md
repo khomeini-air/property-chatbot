@@ -104,6 +104,8 @@ Response:
 ```http
 POST /api/chat
 Authorization: Bearer [token_from_registrationOrLogin]
+Headers: X-Session-ID:[your_unique_session_id]
+
 Request:
 {
   "message": "I want to schedule a viewing for 123 Main St on Friday."
