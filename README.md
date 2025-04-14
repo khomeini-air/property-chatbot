@@ -114,7 +114,7 @@ Request:
 Response:
 {
     "success": true,
-    "message": "Property added",
+    "message": "SUCCESS",
     "data": "Sure, will be glad to help, but first I need more information: your email, appointment time, property id, and landlord email"
 }
 ```
@@ -151,13 +151,11 @@ com.propertybot
 ├── scheduler       // Reminder logic
 ├── security        // JWT & filters
 ├── filter          // Spring filter
-├── filter          // handler logic
+├── handler          // handler logic
 ├── util            // utility classes 
 └── config          // App config and filters
 
 ```
-
----
 
 ## Design Highlights
 
@@ -167,7 +165,6 @@ com.propertybot
 - **ControllerAdvice** for global exception handling
 - **SLF4J Logging** for traceability with masking
 
----
 
 ## Dependencies
 
@@ -178,10 +175,3 @@ com.propertybot
 - H2 Database
 - SLF4J / Logback
 - JUnit / Mockito
-
----
-
-## Contribution
-Pull requests welcome! For major changes, please open an issue first.
-
----
