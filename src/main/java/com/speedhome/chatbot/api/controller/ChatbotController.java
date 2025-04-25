@@ -1,7 +1,8 @@
 package com.speedhome.chatbot.api.controller;
 
-import com.speedhome.chatbot.api.dto.ApiResponse;
-import com.speedhome.chatbot.api.dto.ChatRequest;
+import com.speedhome.chatbot.api.request.ChatRequest;
+import com.speedhome.chatbot.api.response.ChatResponse;
+import com.speedhome.chatbot.api.response.Result;
 import com.speedhome.chatbot.entity.Appointment;
 import com.speedhome.chatbot.entity.ChatMessage;
 import com.speedhome.chatbot.service.AiService;
@@ -10,7 +11,11 @@ import com.speedhome.chatbot.service.ChatSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,7 +30,7 @@ public class ChatbotController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('LANDLORD', 'TENANT')")
-    public ResponseEntity<ApiResponse> chat(@RequestHeader("X-Session-ID") String sessionId,
+    public ResponseEntity<ChatResponse> chat(@RequestHeader("X-Session-ID") String sessionId,
                                             @RequestBody ChatRequest chatRequest) {
         // Store user message
         sessionService.addMessage(sessionId, "user", chatRequest.getMessage());
@@ -40,10 +45,11 @@ public class ChatbotController {
         if (aiResponse.contains("Status: CONFIRMED")) {
             sessionService.clearSession(sessionId);
             Appointment appointment = appointmentService.processAppointment(aiResponse);
-            return ResponseEntity.ok(new ApiResponse(true, "Success", getConfirmedMessage(appointment)));
+            return ResponseEntity.ok(ChatResponse.builder().result(Result.SUCCESS).response(getConfirmedMessage(appointment)).build());
         }
 
-        return ResponseEntity.ok(new ApiResponse(true, "Success", aiResponse));
+        sessionService.addMessage(sessionId, "assistant", aiResponse);
+        return ResponseEntity.ok(ChatResponse.builder().result(Result.SUCCESS).response(aiResponse).build());
     }
 
     private String getConfirmedMessage(Appointment appointment) {

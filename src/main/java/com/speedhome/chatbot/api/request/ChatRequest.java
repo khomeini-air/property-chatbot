@@ -1,4 +1,4 @@
-package com.speedhome.chatbot.api.dto;
+package com.speedhome.chatbot.api.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

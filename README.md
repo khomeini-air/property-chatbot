@@ -56,8 +56,14 @@ Request:
 
 Response:
 {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYW5kbG9yZEB4LmNvbSIsImlhdCI6MTc0NDM4MzA4NiwiZXhwIjoxNzQ0NDY5NDg2fQ.Dzl1CtcF67KLgOGuY92S1L2FTVDlJw2nlpY6P3NzbrA",
-    "username": "landlord@x.com",
+    "result": {
+        "result": "S",
+        "code": "SUCCESS",
+        "description": "Success"
+    },
+    "message": "New user created",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYW5kbG9yZEB4LmNvbSIsImlhdCI6MTc0NTU1MjU4MSwiZXhwIjoxNzQ1NjM4OTgxfQ.VlFMKUyBF5xdslomPu-5fsaJd_URaffLhvtGVHEyhT0",
+    "email": "landlord@x.com",
     "role": "LANDLORD"
 }
 ```
@@ -73,8 +79,14 @@ Request:
 
 Response:
 {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYW5kbG9yZEB4LmNvbSIsImlhdCI6MTc0NDM4MzE3MywiZXhwIjoxNzQ0NDY5NTczfQ.4tPEFAFdABoPsVzF1JHz9AIkCoqtFCVnXhfvM6t9EQg",
-    "username": "landlord@x.com",
+    "result": {
+        "result": "S",
+        "code": "SUCCESS",
+        "description": "Success"
+    },
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYW5kbG9yZEB4LmNvbSIsImlhdCI6MTc0NTU1MjkxMSwiZXhwIjoxNzQ1NjM5MzExfQ.hTWjj_2LHZHBtfPNzaiU1JKZ9GHltyUQ06QlUxBX1xo",
+    "email": "landlord@x.com",
     "role": "LANDLORD"
 }
 ```
@@ -90,13 +102,15 @@ Request:
 
 Response:
 {
-    "success": true,
+    "result": {
+        "result": "S",
+        "code": "SUCCESS",
+        "description": "Success"
+    },
     "message": "Property added",
-    "data": {
-        "id": 1,
-        "address": "xus street avenue",
-        "ownerId": 1
-    }
+    "id": 1,
+    "address": "xus street avenue",
+    "ownerId": 1
 }
 ```
 
@@ -113,9 +127,13 @@ Request:
 
 Response:
 {
-    "success": true,
-    "message": "SUCCESS",
-    "data": "Sure, will be glad to help, but first I need more information: your email, appointment time, property id, and landlord email"
+     "result": {
+        "result": "S",
+        "code": "SUCCESS",
+        "description": "Success"
+    },
+    "message": "Property added",
+    "response": "Sure, will be glad to help, but first I need more information: your email, appointment time, property id, and landlord email"
 }
 ```
 
@@ -140,7 +158,7 @@ logging.api.enabled=true
 ```
 
 
-## Project Structure
+## Application Structure
 
 ```
 com.propertybot

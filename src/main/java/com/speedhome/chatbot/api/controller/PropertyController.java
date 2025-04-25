@@ -1,8 +1,8 @@
 package com.speedhome.chatbot.api.controller;
 
-import com.speedhome.chatbot.api.dto.ApiResponse;
-import com.speedhome.chatbot.api.dto.PropertyRequest;
-import com.speedhome.chatbot.api.dto.PropertyResponse;
+import com.speedhome.chatbot.api.request.PropertyRequest;
+import com.speedhome.chatbot.api.response.PropertyResponse;
+import com.speedhome.chatbot.api.response.Result;
 import com.speedhome.chatbot.entity.User;
 import com.speedhome.chatbot.service.PropertyService;
 import jakarta.validation.Valid;
@@ -24,12 +24,18 @@ public class PropertyController {
 
     @PostMapping
     @PreAuthorize("hasRole('LANDLORD')")
-    public ResponseEntity<ApiResponse> addProperty(
+    public ResponseEntity<PropertyResponse> addProperty(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestBody @Valid PropertyRequest request) {
 
         User user = (User) userDetails;
         PropertyResponse response = propertyService.addProperty(user.getId(), request);
-        return ResponseEntity.ok(new ApiResponse(true, "Property added", response));
+        return ResponseEntity.ok(PropertyResponse.builder()
+                .result(Result.SUCCESS)
+                .id(response.getId())
+                .ownerId(response.getOwnerId())
+                .address(response.getAddress())
+                .message("Property added")
+                .build());
     }
 }

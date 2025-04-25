@@ -1,7 +1,7 @@
 package com.speedhome.chatbot.service;
 
-import com.speedhome.chatbot.api.dto.PropertyRequest;
-import com.speedhome.chatbot.api.dto.PropertyResponse;
+import com.speedhome.chatbot.api.request.PropertyRequest;
+import com.speedhome.chatbot.api.response.PropertyResponse;
 
 import java.util.List;
 

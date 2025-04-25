@@ -1,5 +1,8 @@
 package com.speedhome.chatbot.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum Role {
     LANDLORD("ROLE_LANDLORD"),
     TENANT("ROLE_TENANT"),
@@ -9,9 +12,5 @@ public enum Role {
 
     Role(String authority) {
         this.authority = authority;
-    }
-
-    public String getAuthority() {
-        return authority;
     }
 }

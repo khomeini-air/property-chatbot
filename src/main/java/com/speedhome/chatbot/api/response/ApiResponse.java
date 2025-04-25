@@ -1,14 +1,15 @@
-package com.speedhome.chatbot.api.dto;
+package com.speedhome.chatbot.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse {
-    private boolean success;
+    private Result result;
     private String message;
-    private Object data;
 }

@@ -1,11 +1,12 @@
 package com.speedhome.chatbot.api.controller;
 
-import com.speedhome.chatbot.api.dto.UserLoginRequest;
-import com.speedhome.chatbot.api.dto.UserRegisterRequest;
-import com.speedhome.chatbot.api.dto.AuthResponse;
+import com.speedhome.chatbot.api.request.UserLoginRequest;
+import com.speedhome.chatbot.api.request.UserRegisterRequest;
+import com.speedhome.chatbot.api.response.AuthResponse;
 import com.speedhome.chatbot.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid UserRegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
     }
 
     @PostMapping("/login")

@@ -1,7 +1,8 @@
 package com.speedhome.chatbot.service.impl;
 
-import com.speedhome.chatbot.api.dto.PropertyRequest;
-import com.speedhome.chatbot.api.dto.PropertyResponse;
+import com.speedhome.chatbot.api.request.PropertyRequest;
+import com.speedhome.chatbot.api.response.PropertyResponse;
+import com.speedhome.chatbot.api.response.Result;
 import com.speedhome.chatbot.entity.Property;
 import com.speedhome.chatbot.entity.User;
 import com.speedhome.chatbot.repository.PropertyRepository;
@@ -42,7 +43,8 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyResponse> getPropertiesByUser(Long userId) {
         return propertyRepository.findByUserId(userId)
                 .stream()
-                .map(p -> PropertyResponse.builder()
+                .map(p -> (PropertyResponse) PropertyResponse.builder()
+                        .result(Result.SUCCESS)
                         .id(p.getId())
                         .address(p.getAddress())
                         .ownerId(p.getUser().getId())

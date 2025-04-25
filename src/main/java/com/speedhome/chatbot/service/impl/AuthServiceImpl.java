@@ -1,9 +1,9 @@
 package com.speedhome.chatbot.service.impl;
 
-import com.speedhome.chatbot.api.dto.UserLoginRequest;
-import com.speedhome.chatbot.api.dto.UserRegisterRequest;
-import com.speedhome.chatbot.api.dto.AuthResponse;
-import com.speedhome.chatbot.entity.Role;
+import com.speedhome.chatbot.api.response.AuthResponse;
+import com.speedhome.chatbot.api.request.UserLoginRequest;
+import com.speedhome.chatbot.api.request.UserRegisterRequest;
+import com.speedhome.chatbot.api.response.Result;
 import com.speedhome.chatbot.entity.User;
 import com.speedhome.chatbot.exception.EmailExistsException;
 import com.speedhome.chatbot.repository.UserRepository;
@@ -34,16 +34,18 @@ public class AuthServiceImpl implements AuthService {
                 .email(request.getEmail())
                 .mobile(request.getMobile())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.valueOf(request.getRole()))
+                .role(request.getRole())
                 .build();
         userRepository.save(user);
         log.info("New user created successfully. User Email: {}", user.getEmail());
 
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder()
+                .result(Result.SUCCESS)
                 .token(jwtToken)
-                .username(user.getUsername())
+                .email(user.getUsername())
                 .role(user.getRole().name())
+                .message("New user created")
                 .build();
     }
 
@@ -60,9 +62,11 @@ public class AuthServiceImpl implements AuthService {
         log.info("User Logged in successfully. User Email: {}", user.getEmail());
 
         return AuthResponse.builder()
+                .result(Result.SUCCESS)
                 .token(jwtToken)
-                .username(user.getUsername())
+                .email(user.getUsername())
                 .role(user.getRole().name())
+                .message("Login successful")
                 .build();
     }
 }
